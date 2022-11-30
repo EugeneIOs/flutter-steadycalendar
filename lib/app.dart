@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:matcher/matcher.dart';
+import 'package:steadycalendar/screens/intro.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -12,9 +13,9 @@ class App extends StatelessWidget {
       title: 'Steady Calendar',
       initialRoute: Intro.routeName,
       routes: {
-        Splash.routeName: ((context) => const Splash()),
-        CalPager.routeName: ((context) => const CalPager()),
-        LoginOptions.routeName: ((context) => const LoginOptions()),
+        // Splash.routeName: ((context) => const Splash()),
+        // CalPager.routeName: ((context) => const CalPager()),
+        // LoginOptions.routeName: ((context) => const LoginOptions()),
         Intro.routeName: ((context) => const Intro()),
       },
     );
