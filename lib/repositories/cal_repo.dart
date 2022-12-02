@@ -3,10 +3,18 @@ import 'package:steadycalendar/repositories/cal_repo_interface.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class CalendarRepository implements CalRepoInterface {
+  const CalendarRepository();
+
   @override
   Future<List<Calendar>> refreshCalendars() async {
-    Supabase.instance.client
+    final resp = await Supabase.instance.client
         .from('calendars')
-        .select('idm name, color, background_slug, calendar_dates (date)');
+        .select('id, name, color, background_slug, calendar_dates (date)')
+        .execute();
+    if (resp.error != null) {
+      throw (resp.error.toString());
+    }
+
+    return resp.data.map<Calendar>((e) => Calendar.fromJson(e)).toList();
   }
 }
