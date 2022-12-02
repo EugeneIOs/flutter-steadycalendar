@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:steadycalendar/components/sc_image_button.dart';
 import 'package:steadycalendar/screens/cal_pager/cal_pager.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 // import 'package:lesson01/screens/cal_pager/cal_pager.dart';
 // import 'package:lesson01/screens/splash/splash.dart';
 // import '/components/sc_image_button.dart';
 import '/components/sc_flat_button.dart';
 import '/config/styles.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class LoginOptions extends StatelessWidget {
   static const String routeName = '/intro/login_options';
@@ -43,6 +45,7 @@ class LoginOptions extends StatelessWidget {
 
   Future _signupTapped(BuildContext context) async {
     // NOTE we're simulating login here for now
-    Navigator.of(context).pushNamed(CalPager.routeName);
+    await Supabase.instance.client.auth.signInWithProvider(Provider.google,
+        options: AuthOptions(redirectTo: env['SUPABASE_AUTH_CALLBACK']!));
   }
 }
